@@ -79,11 +79,13 @@ pub fn basic_num() {
 
 pub fn basic_others() {
     let is_active = true;
+    // Rust char is not only ASCII, it can also be unicode, such as a single Chinese character, emoji, etc.
     let chara = 'a';
     let emoji_cat = '😻';
     let emoji_cat_hex = '\u{1F63B}';
     let hi = "hello world";
 
+    test_for();
 
     // print the variable
     println!("is_active: {}", is_active);
@@ -96,6 +98,14 @@ pub fn basic_others() {
 fn add(x: i32, y: i32) -> i32 {
     // return x + y; // this is ok
     x + y // this is also ok, because the last expression will be returned
+}
+
+fn test_for() {
+    // if has =, 5 will be included, otherwise, 5 will not be included
+    // for i in 1..5 {
+    for i in 1..=5 {
+        println!("i: {}", i);
+    }
 }
 
 // use the "r#keyword" syntax to use the keyword as an identifier
