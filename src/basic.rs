@@ -1,4 +1,7 @@
 pub fn basic_num() {
+    // the integer number in rust is i32 by default
+    // the floating number in rust is f64 by default
+
     // x type will be inferred by the compiler as i32, because we assigned it to 5
     let x = 5;
 
@@ -25,6 +28,9 @@ pub fn basic_num() {
     let k7 = 10u64;
     let k8 = 10f32;
     let k9 = 10f64;
+
+    // the length is platform dependent, if cpu is 32bit, then isize is i32, if cpu is 64bit, then isize is i64
+    // usize is the same as isize, but it is unsigned
     let k_isize = 10isize;
     let k_usize = 10usize;
 
@@ -34,6 +40,19 @@ pub fn basic_num() {
 
     // call the add function
     let f = add(10, 20);
+
+    // compare two floating numbers
+    // NOTES:
+    // 1. floating numbers are not accurate, so we need to compare the difference between them
+    // 2. we need to explicitly the f1 or f2 as f64, otherwise, the abs() function will not work
+    // let f1 = 0.1 + 0.2; // this will cause an error, error[E0689]: can't call method `abs` on ambiguous numeric type `{float}`
+    let f1: f64 = 0.1 + 0.2;
+    let f2 = 0.3;
+    if (f1 - f2).abs() < f64::EPSILON {
+        println!("f1 and f2 are equal");
+    } else {
+        println!("f1 and f2 are not equal");
+    }
 
     // print the variables
     println!("x: {}", x);
@@ -59,12 +78,19 @@ pub fn basic_num() {
 }
 
 pub fn basic_others() {
-    // here is a bool
     let is_active = true;
+    let chara = 'a';
+    let emoji_cat = '😻';
+    let emoji_cat_hex = '\u{1F63B}';
+    let hi = "hello world";
 
 
     // print the variable
     println!("is_active: {}", is_active);
+    println!("chara: {}", chara);
+    println!("emoji_cat: {}", emoji_cat);
+    println!("emoji_cat_hex: {}", emoji_cat_hex);
+    println!("hi: {}", hi);
 }
 
 fn add(x: i32, y: i32) -> i32 {
