@@ -1,4 +1,4 @@
-.PHONY: help
+.PHONY: help build run test bench fmt clean
 .DEFAULT_GOAL := help
 
 # build
@@ -10,6 +10,26 @@ build:
 run:
 	@echo "Running..."
 	@cargo run
+
+# test
+test:
+	@echo "Testing..."
+	@cargo test
+
+# bench
+bench:
+	@echo "Benchmarking..."
+	@cargo bench
+
+# fmt
+fmt:
+	@echo "Formatting..."
+	@cargo fmt
+
+# clean
+clean:
+	@echo "Cleaning..."
+	@cargo clean
 
 # Show help
 help:
