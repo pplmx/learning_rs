@@ -13,5 +13,4 @@ fn main() {
 
     ownership::transferring();
     ownership::borrowing();
-    ownership::kk();
 }
