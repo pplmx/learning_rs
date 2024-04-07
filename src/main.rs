@@ -1,4 +1,5 @@
 mod basic;
+mod ownership;
 
 fn main() {
     basic::basic_num();
@@ -8,4 +9,9 @@ fn main() {
     basic::r#if(11);
     basic::r#if(8);
     basic::r#if(2);
+    println!("=====================");
+
+    ownership::transferring();
+    ownership::borrowing();
+    ownership::kk();
 }

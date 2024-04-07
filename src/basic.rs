@@ -105,11 +105,39 @@ pub fn basic_others() {
     println!("emoji_cat: {}", emoji_cat);
     println!("emoji_cat_hex: {}", emoji_cat_hex);
     println!("hi: {}", hi);
+
+    // 函数没有返回值, 所以返回值是 ()
+    assert_eq!(no_return(), ());
+
+    // 函数演示了变量的作用域和遮蔽
+    variable_scope_shadowing();
 }
 
 fn add(x: i32, y: i32) -> i32 {
     // return x + y; // 通过 return 关键字返回值, 与下面的代码等价
-    x + y // rust 中的函数默认返回最后一个表达式的值
+    x + y // rust 中的函数默认返回最后一个表达式的值, 表达式不需要使用分号结尾
+}
+
+fn no_return() {
+    // 其他语言中的无返回值函数, 在 Rust 中返回值是 (), 即 unit 类型. 它是一个空元组.
+}
+
+fn variable_scope_shadowing() {
+    let shadowed_binding = 1;
+
+    {
+        println!("before being shadowed: {}", shadowed_binding);
+
+        // This binding *shadows* the outer one
+        let shadowed_binding = "abc";
+
+        println!("shadowed in inner block: {}", shadowed_binding);
+    }
+    println!("outside inner block: {}", shadowed_binding);
+
+    // This binding *shadows* the previous binding
+    let shadowed_binding = 2;
+    println!("shadowed in outer block: {}", shadowed_binding);
 }
 
 fn test_for() {
@@ -122,6 +150,12 @@ fn test_for() {
     (1..5).for_each(|i| {
         println!("左闭右开[1, 5) i: {}", i);
     });
+
+    // 由于 Rust 中的 char 是 Unicode 字符, 所以可以直接打印
+    // 打印从 '你' 到 '我' 的所有字符
+    // ('你'..='我').for_each(|x| print!("{}", x));
+    // 统计从 '你' 到 '我' 的字符个数
+    println!("'你' 到 '我' 之间的字符个数: {}", ('你'..='我').count());
 }
 
 // 使用 "r#keyword" 语法将关键字用作标识符
