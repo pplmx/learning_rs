@@ -5,5 +5,7 @@ fn main() {
     println!("=====================");
     basic::basic_others();
     println!("=====================");
-    basic::r#if();
+    basic::r#if(11);
+    basic::r#if(8);
+    basic::r#if(2);
 }

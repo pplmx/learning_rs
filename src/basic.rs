@@ -1,23 +1,25 @@
 pub fn basic_num() {
-    // the integer number in rust is i32 by default
-    // the floating number in rust is f64 by default
+    // 整型的默认类型是 i32
+    // 浮点型的默认类型是 f64
 
-    // x type will be inferred by the compiler as i32, because we assigned it to 5
+    // 由于未指定类型, 编译器会根据赋值的类型进行推断, 这里是 i32
     let x = 5;
 
-    // x = 10; // this will cause an error, because x is immutable by default
+    // rust 中的变量默认是不可变的, 如果需要可变变量, 需要使用 "mut" 关键字
+    // x = 10; // 由于 x 是不可变的, 这里会报错
 
-    // assign 10.1 to y, and the compiler will infer the type as f64
+    // 由于未指定类型, 编译器会根据赋值的类型进行推断, 这里是 f64
     let y = 10.1;
 
-    // we can also explicitly define the type, here is an i64
+    // 指定类型
     let z: i64 = 1234567890;
 
-    // define a mutable variable
+    // 定义一个可变变量
     let mut k = 10;
     println!("mutable variable ->k: {}", k);
-    k = 20; // this is ok, because k is declared as mutable by "mut"
+    k = 20; // 由于 k 是可变的, 这里不会报错
 
+    // 也可以通过数值的类型后缀来指定类型
     let k0 = 10i8;
     let k1 = 10i16;
     let k2 = 10i32;
@@ -29,22 +31,24 @@ pub fn basic_num() {
     let k8 = 10f32;
     let k9 = 10f64;
 
-    // the length is platform-dependent, if cpu is 32bit, then isize is i32, if cpu is 64bit, then isize is i64
-    // usize is the same as isize, but it is unsigned
+    // isize 和 usize 的长度是平台相关的整型.
+    // 如果 cpu 是 32 位, 那么 isize 是 i32
+    // 如果 cpu 是 64 位, 那么 isize 是 i64
     let k_isize = 10isize;
     let k_usize = 10usize;
 
-    let n0 = 1000_i64; // this is 1000 in i64
-    let n1 = 1_0_0_0; // this is 1000 in i32
-    let n2 = 1_000_00_00; // this is 10000000 in i32
+    // 下划线可以用来增加数字的可读性, 但是不会影响数字的值
+    let n0 = 1000_i64; // i64 类型的 1000
+    let n1 = 1_0_0_0; // i32 类型的 1000
+    let n2 = 1_000_00_00; // i32 类型的 10000000
 
     // call the add function
     let f = add(10, 20);
 
-    // compare two floating numbers
+    // 比较浮点数
     // NOTES:
-    // 1. floating numbers are not accurate, so we need to compare the difference between them
-    // 2. we need to explicitly the f1 or f2 as f64, otherwise, the abs() function will not work
+    //     1. 浮点数是不精确的, 所以我们需要比较它们之间的差值
+    //     2. 我们需要显式地将 f1 或 f2 定义为 f64, 否则 abs() 函数将无法工作
     /*
     let f1 = 0.1 + 0.2;
     let f2 = 0.3;
@@ -52,7 +56,7 @@ pub fn basic_num() {
     It will cause an error:
         error[E0689]: can't call method `abs` on ambiguous numeric type `{float}`
     */
-    let f1: f64 = 0.1 + 0.2; // Notes: we must explicitly define the type as f64, due to the latter abs() usage
+    let f1: f64 = 0.1 + 0.2; // Notes: 需要显式地将 f1 定义为 f64
     let f2 = 0.3;
     let is_equal = (f1 - f2).abs() < f64::EPSILON;
     if is_equal {
@@ -86,29 +90,30 @@ pub fn basic_num() {
 
 pub fn basic_others() {
     let is_active = true;
-    // Rust char is not only ASCII, it can also be unicode, such as a single Chinese character, emoji, etc.
+    // Rust 中的 char 不仅仅是 ASCII, 它还可以是 unicode, 比如单个中文字符, emoji 等
     let chara = 'a';
+    let char_ni = '你';
     let emoji_cat = '😻';
     let emoji_cat_hex = '\u{1F63B}';
     let hi = "hello world";
 
     test_for();
 
-    // print the variable
     println!("is_active: {}", is_active);
     println!("chara: {}", chara);
+    println!("char_ni: {}", char_ni);
     println!("emoji_cat: {}", emoji_cat);
     println!("emoji_cat_hex: {}", emoji_cat_hex);
     println!("hi: {}", hi);
 }
 
 fn add(x: i32, y: i32) -> i32 {
-    // return x + y; // this is ok
-    x + y // this is also ok, because the last expression will be returned
+    // return x + y; // 通过 return 关键字返回值, 与下面的代码等价
+    x + y // rust 中的函数默认返回最后一个表达式的值
 }
 
 fn test_for() {
-    // if it has "=", 5 will be included, otherwise, 5 will not be included
+    // 如果有"="号, 则是全闭区间
     // for i in 1..5 {
     for i in 1..=5 {
         println!("全闭[1, 5] i: {}", i);
@@ -119,12 +124,21 @@ fn test_for() {
     });
 }
 
-// use the "r#keyword" syntax to use the keyword as an identifier
-pub fn r#if() {
-    let r#match = 10;
-    if r#match == 10 {
-        println!("match");
-    } else {
-        println!("not match");
+// 使用 "r#keyword" 语法将关键字用作标识符
+// 由于 "if" 和 "match" 是关键字, 所以不能直接用作函数名或参数名
+// 这里, 我们分别使用 "r#if" 和 "r#match" 作为函数名和参数名
+pub fn r#if(r#match: i32) {
+    if r#match > 10 {
+        println!("greater than 10");
+        return;
+    }
+
+    match r#match {
+        1 => println!("one"),
+        2 => println!("two"),
+        3 => println!("three"),
+        4 => println!("four"),
+        5 => println!("five"),
+        _ => println!("others"),
     }
 }
