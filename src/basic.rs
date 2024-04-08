@@ -65,6 +65,14 @@ pub fn basic_num() {
         println!("f1 and f2 are not equal");
     }
 
+    // define an array with repeating values in basic types
+    let arr = [1; 5]; // [1, 1, 1, 1, 1]
+
+    // define an array with repeating String values
+    let s_arr: [String; 3] = std::array::from_fn(|_i| {
+        String::from("hello")
+    });
+
     // print the variables
     println!("x: {}", x);
     println!("y: {}", y);
@@ -86,6 +94,8 @@ pub fn basic_num() {
     println!("n1: {}", n1);
     println!("n2: {}", n2);
     println!("f: {}", f);
+    println!("arr: {:?}", arr);
+    println!("s_arr: {:?}", s_arr);
 }
 
 pub fn basic_others() {
