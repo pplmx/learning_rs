@@ -28,3 +28,8 @@ pub fn qs(arr: Vec<i32>) -> Vec<i32> {
     let (low, high) = arr[1..].iter().partition(|&&x| x < pivot);
     return [qs(low), vec![pivot], qs(high)].concat();
 }
+
+// Using std::ops::Add<Output = T> to restrict T
+pub fn add<T: std::ops::Add<Output=T>>(a: T, b: T) -> T {
+    a + b
+}
