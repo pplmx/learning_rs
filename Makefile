@@ -19,7 +19,9 @@ test:
 # bench
 bench:
 	@echo "Benchmarking..."
+	@rustup default nightly
 	@cargo bench
+	@rustup default stable
 
 # fmt
 fmt:
