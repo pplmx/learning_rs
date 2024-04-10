@@ -26,17 +26,17 @@ fn bench_std_sort(b: &mut Bencher) {
 }
 
 #[bench]
-fn bench_quick_sort(b: &mut Bencher) {
-    let mut arr = random_array(10000); // Change the size as needed
-    b.iter(|| {
-        quick_sort(&mut arr);
-    });
-}
-
-#[bench]
 fn bench_qs(b: &mut Bencher) {
     let arr = random_array(10000); // Change the size as needed
     b.iter(|| {
         qs(arr.clone());
+    });
+}
+
+#[bench]
+fn bench_quick_sort(b: &mut Bencher) {
+    let mut arr = random_array(10000); // Change the size as needed
+    b.iter(|| {
+        quick_sort(&mut arr);
     });
 }
