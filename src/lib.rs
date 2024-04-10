@@ -1,7 +1,9 @@
+use std::ops::Add;
+
 // 这里使用了特征约束, 限制了泛型参数 T 的类型
 // 如下的代码中, T 必须实现 std::ops::Add<Output=T> 这个 trait
 // std::ops::Add<Output=T> 是一个 trait, 它定义了加法运算符 + 的行为
-pub fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+pub fn add<T: Add<Output = T>>(a: T, b: T) -> T {
     a + b
 }
 
