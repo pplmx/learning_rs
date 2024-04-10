@@ -69,9 +69,7 @@ pub fn basic_num() {
     let arr = [1; 5]; // [1, 1, 1, 1, 1]
 
     // define an array with repeating String values
-    let s_arr: [String; 3] = std::array::from_fn(|_i| {
-        String::from("hello")
-    });
+    let s_arr: [String; 3] = std::array::from_fn(|_i| String::from("hello"));
 
     // print the variables
     println!("x: {}", x);

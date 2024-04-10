@@ -1,6 +1,17 @@
-// Using std::ops::Add<Output=T> to restrict T
-pub fn add<T: std::ops::Add<Output=T>>(a: T, b: T) -> T {
+// std::ops::Add<Output=T> is a trait that allows the + operator to be used on values of the same type.
+pub fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b
+}
+
+// PartialOrd is a trait that allows comparison between values of the same type.
+pub fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
 }
 
 pub fn qs(arr: Vec<i32>) -> Vec<i32> {
@@ -12,6 +23,7 @@ pub fn qs(arr: Vec<i32>) -> Vec<i32> {
     return [qs(low), vec![pivot], qs(high)].concat();
 }
 
+// Directly change the input array to reduce memory usage
 pub fn quick_sort<T: PartialOrd>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
