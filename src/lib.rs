@@ -1,9 +1,11 @@
-// std::ops::Add<Output=T> is a trait that allows the + operator to be used on values of the same type.
+// 这里使用了特征约束, 限制了泛型参数 T 的类型
+// 如下的代码中, T 必须实现 std::ops::Add<Output=T> 这个 trait
+// std::ops::Add<Output=T> 是一个 trait, 它定义了加法运算符 + 的行为
 pub fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b
 }
 
-// PartialOrd is a trait that allows comparison between values of the same type.
+// PartialOrd 是一个 trait, 用于比较两个值的大小
 pub fn largest<T: PartialOrd>(list: &[T]) -> &T {
     let mut largest = &list[0];
     for item in list {
@@ -23,7 +25,7 @@ pub fn qs(arr: Vec<i32>) -> Vec<i32> {
     return [qs(low), vec![pivot], qs(high)].concat();
 }
 
-// Directly change the input array to reduce memory usage
+// 快速排序: 直接在原数组上进行排序, 以减少内存开销
 pub fn quick_sort<T: PartialOrd>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;
@@ -34,7 +36,12 @@ pub fn quick_sort<T: PartialOrd>(arr: &mut [T]) {
     quick_sort(&mut arr[pivot_index + 1..]);
 }
 
-fn partition<T: PartialOrd>(arr: &mut [T]) -> usize {
+// 这里的 where 和上面的 quick_sort<T: PartialOrd> 是等价的
+// 当函数签名中有多个泛型参数时, where 语句更加清晰简洁
+fn partition<T>(arr: &mut [T]) -> usize
+where
+    T: PartialOrd,
+{
     let pivot_index = arr.len() / 2;
     arr.swap(pivot_index, arr.len() - 1);
     let mut i = 0;
