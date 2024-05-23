@@ -3,6 +3,23 @@ use std::ops::Add;
 // 这里使用了特征约束, 限制了泛型参数 T 的类型
 // 如下的代码中, T 必须实现 std::ops::Add<Output=T> 这个 trait
 // std::ops::Add<Output=T> 是一个 trait, 它定义了加法运算符 + 的行为
+// 也就是说, T 类型的值可以使用 + 运算符进行相加
+// 例如, i32 类型的值可以相加, f32 类型的值也可以相加
+// 但是, i32 类型的值和 f32 类型的值不能相加
+// 所以, T 必须实现 Add<Output=T> 这个 trait, 以保证泛型参数 T 的值可以相加
+// 这样, add 函数就可以接受任意类型的参数, 只要这个类型实现了 Add<Output=T> 这个 trait
+// 这就是泛型编程的优势, 可以编写出更加通用的代码
+/**
+[`add`] 这里是一个函数跳转链接
+```
+// DocTest
+use learning_rs::add;
+
+let a = 1;
+let b = 2;
+assert_eq!(add(a, b), 3);
+```
+ */
 pub fn add<T: Add<Output = T>>(a: T, b: T) -> T {
     a + b
 }
