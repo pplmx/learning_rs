@@ -1,5 +1,8 @@
 #[cfg(test)]
 mod tests {
+    use num_complex::Complex;
+
+    use learning_rs::fft;
     use learning_rs::{add, largest, qs, quick_sort};
 
     #[test]
@@ -42,5 +45,30 @@ mod tests {
         let mut arr = vec!['a', 'c', 'b', 'e', 'd'];
         quick_sort(&mut arr);
         assert_eq!(arr, vec!['a', 'b', 'c', 'd', 'e']);
+    }
+
+    #[test]
+    fn test_fft_ifft() {
+        // 定义测试数据
+        let mut data = vec![
+            Complex::new(0.0, 0.0),
+            Complex::new(1.0, 0.0),
+            Complex::new(0.0, 0.0),
+            Complex::new(0.0, 0.0),
+        ];
+
+        // 保存原始数据用于比较
+        let original_data = data.clone();
+
+        // 执行正向 FFT
+        fft(&mut data, false);
+        // 执行反向 FFT
+        fft(&mut data, true);
+
+        // 比较反向 FFT 的结果与原始数据
+        for i in 0..data.len() {
+            // 确保误差在容许范围内
+            assert!((data[i] - original_data[i]).norm() < 1e-10);
+        }
     }
 }

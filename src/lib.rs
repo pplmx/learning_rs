@@ -1,4 +1,8 @@
+extern crate num_complex;
+use std::f64::consts::PI;
 use std::ops::Add;
+
+use num_complex::Complex;
 
 // 这里使用了特征约束, 限制了泛型参数 T 的类型
 // 如下的代码中, T 必须实现 std::ops::Add<Output=T> 这个 trait
@@ -72,4 +76,43 @@ where
     }
     arr.swap(i, arr.len() - 1);
     i
+}
+
+/// 通用的 FFT 函数
+///
+/// # 参数
+///
+/// - `input`: 待变换的复数数组
+/// - `inverse`: 标志是否进行反向变换 (true 表示 IFFT, false 表示 FFT)
+pub fn fft(input: &mut [Complex<f64>], inverse: bool) {
+    let n = input.len();
+    if n <= 1 {
+        return;
+    }
+
+    // 分离为偶数和奇数下标的元素
+    let mut even = input.iter().step_by(2).cloned().collect::<Vec<_>>();
+    let mut odd = input.iter().skip(1).step_by(2).cloned().collect::<Vec<_>>();
+
+    // 递归计算 FFT
+    fft(&mut even, inverse);
+    fft(&mut odd, inverse);
+
+    // 根据是否是反向变换决定指数的符号
+    let sign = if inverse { 2.0 } else { -2.0 };
+
+    for i in 0..n / 2 {
+        // 计算复数的旋转因子
+        let t = Complex::from_polar(1.0, sign * PI * i as f64 / n as f64) * odd[i];
+        // 合并偶数和奇数部分的结果
+        input[i] = even[i] + t;
+        input[i + n / 2] = even[i] - t;
+    }
+
+    // 如果是反向变换，结果需要除以 2
+    if inverse {
+        for x in input.iter_mut() {
+            *x = *x / 2.0;
+        }
+    }
 }
