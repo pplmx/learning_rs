@@ -40,7 +40,7 @@ pub fn basic_num() {
     // 下划线可以用来增加数字的可读性, 但是不会影响数字的值
     let n0 = 1000_i64; // i64 类型的 1000
     let n1 = 1_0_0_0; // i32 类型的 1000
-    let n2 = 1_000_00_00; // i32 类型的 10000000
+    let n2 = 10_000_000; // i32 类型的 10000000
 
     // call the add function
     let f = add(10, 20);
@@ -115,7 +115,7 @@ pub fn basic_others() {
     println!("hi: {}", hi);
 
     // 函数没有返回值, 所以返回值是 ()
-    assert_eq!(no_return(), ());
+    no_return();
 
     // 函数演示了变量的作用域和遮蔽
     variable_scope_shadowing();

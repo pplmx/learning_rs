@@ -23,7 +23,7 @@ pub fn fft(input: &mut [Complex<f64>], inverse: bool) {
 
     if inverse {
         for x in input.iter_mut() {
-            *x = *x / 2.0;
+            *x /= 2.0;
         }
     }
 }

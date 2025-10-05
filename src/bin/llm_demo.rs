@@ -40,8 +40,7 @@ fn main() {
     println!("输出 Logits 形状: {:?}", output_logits.shape());
     println!(
         "\n预期形状: [sequence_length, vocab_size] -> [{}, {}]",
-        seq_len,
-        vocab_size
+        seq_len, vocab_size
     );
 
     println!("\n✓ 演示完成!");

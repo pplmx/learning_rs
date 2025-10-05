@@ -8,7 +8,7 @@ use test::Bencher;
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
-use learning_rs::{qs, quick_sort};
+use learning_rs::modules::algorithms::sorting::{qs, quick_sort};
 
 fn random_array(size: usize) -> Vec<i32> {
     let mut rng = thread_rng();

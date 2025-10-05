@@ -1,8 +1,8 @@
 use crate::modules::llm::embedding::{PositionalEncoding, TokenEmbedding};
 use crate::modules::llm::transformer::TransformerBlock;
 use ndarray::Array2;
-use ndarray_rand::rand_distr::Uniform;
 use ndarray_rand::RandomExt;
+use ndarray_rand::rand_distr::Uniform;
 
 pub struct LanguageModel {
     token_embedding: TokenEmbedding,

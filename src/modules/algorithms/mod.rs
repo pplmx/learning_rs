@@ -1,3 +1,3 @@
+pub mod fft;
 pub mod general;
 pub mod sorting;
-pub mod fft;

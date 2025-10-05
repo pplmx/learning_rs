@@ -26,19 +26,15 @@ impl TransformerBlock {
 
         // 2. Feed-Forward with residual connection and layer norm
         let ff_output = self.feed_forward.forward(&sublayer1_output);
-        let sublayer2_output = self.norm2.forward(&(sublayer1_output + ff_output));
-
-        sublayer2_output
+        self.norm2.forward(&(sublayer1_output + ff_output))
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::modules::llm::attn::MultiHeadAttention;
-    use crate::modules::llm::core::{FeedForward, LayerNorm};
-    use ndarray_rand::rand_distr::Uniform;
     use ndarray_rand::RandomExt;
+    use ndarray_rand::rand_distr::Uniform;
 
     #[test]
     fn test_transformer_block_shape() {

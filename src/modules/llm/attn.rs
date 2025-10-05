@@ -1,8 +1,9 @@
 use ndarray::{Array2, Axis};
-use ndarray_rand::rand_distr::Uniform;
 use ndarray_rand::RandomExt;
+use ndarray_rand::rand_distr::Uniform;
 
 /// Self-Attention 层
+#[allow(dead_code)]
 pub struct SelfAttention {
     d_model: usize,
     d_k: usize,
@@ -45,7 +46,11 @@ impl SelfAttention {
     ///
     /// # 返回
     /// (输出矩阵 (seq_len, d_v), 注意力权重 (seq_len, seq_len))
-    pub fn forward(&self, x: &Array2<f32>, mask: Option<&Array2<f32>>) -> (Array2<f32>, Array2<f32>) {
+    pub fn forward(
+        &self,
+        x: &Array2<f32>,
+        mask: Option<&Array2<f32>>,
+    ) -> (Array2<f32>, Array2<f32>) {
         // 计算 Q, K, V
         let q = x.dot(&self.w_q); // (seq_len, d_k)
         let k = x.dot(&self.w_k); // (seq_len, d_k)
@@ -56,7 +61,7 @@ impl SelfAttention {
 
         // 应用掩码 (如果提供)
         if let Some(m) = mask {
-            scores = scores + m;
+            scores += m;
         }
 
         // Softmax (沿最后一个维度)
@@ -136,6 +141,7 @@ impl Default for SelfAttentionBuilder {
 }
 
 /// Multi-Head Attention (额外功能)
+#[allow(dead_code)]
 pub struct MultiHeadAttention {
     heads: Vec<SelfAttention>,
     w_o: Array2<f32>,
@@ -189,7 +195,7 @@ impl MultiHeadAttention {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use ndarray::{array, Array2};
+    use ndarray::{Array2, array};
     use ndarray_rand::rand_distr::Uniform;
 
     #[test]

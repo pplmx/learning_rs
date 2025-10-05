@@ -4,7 +4,7 @@ pub fn qs(arr: Vec<i32>) -> Vec<i32> {
     }
     let pivot = arr[0];
     let (low, high) = arr[1..].iter().partition(|&&x| x < pivot);
-    return [qs(low), vec![pivot], qs(high)].concat();
+    [qs(low), vec![pivot], qs(high)].concat()
 }
 
 pub fn quick_sort<T: PartialOrd>(arr: &mut [T]) {

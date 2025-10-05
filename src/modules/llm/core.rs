@@ -1,6 +1,6 @@
 use ndarray::{Array1, Array2, Axis};
-use ndarray_rand::rand_distr::Uniform;
 use ndarray_rand::RandomExt;
+use ndarray_rand::rand_distr::Uniform;
 
 // --- Layer Normalization ---
 
@@ -32,7 +32,7 @@ impl LayerNorm {
         let gamma = self.gamma.view().insert_axis(Axis(0)); // Shape [1, d_model]
         let beta = self.beta.view().insert_axis(Axis(0)); // Shape [1, d_model]
 
-        &x_norm * &gamma + &beta
+        &x_norm * &gamma + beta
     }
 }
 
@@ -70,7 +70,6 @@ impl FeedForward {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use ndarray::arr2;
 
     #[test]
     fn test_layer_norm_shape_and_mean_std() {

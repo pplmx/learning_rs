@@ -1,6 +1,6 @@
-use ndarray::{s, Array, Array2, Axis};
-use ndarray_rand::rand_distr::Uniform;
+use ndarray::{Array, Array2, Axis, s};
 use ndarray_rand::RandomExt;
+use ndarray_rand::rand_distr::Uniform;
 
 // --- Token Embedding ---
 
