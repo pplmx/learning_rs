@@ -1,9 +1,9 @@
 #[cfg(test)]
 mod tests {
+    use learning_rs::modules::algorithms::fft::fft;
+    use learning_rs::modules::algorithms::general::{add, largest};
+    use learning_rs::modules::algorithms::sorting::{qs, quick_sort};
     use num_complex::Complex;
-
-    use learning_rs::fft;
-    use learning_rs::{add, largest, qs, quick_sort};
 
     #[test]
     fn test_add_i32() {

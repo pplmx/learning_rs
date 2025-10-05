@@ -1,5 +1,4 @@
-mod basic;
-mod ownership;
+use learning_rs::modules::rust_basics::{basic, ownership};
 
 fn main() {
     basic::basic_num();

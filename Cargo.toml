@@ -1,10 +1,16 @@
 [package]
 name = "learning_rs"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 rand = "0.8.5"
 num-complex = "0.4"
+ndarray = "0.16.1"
+ndarray-rand = "0.15.0"
+
+[[bin]]
+name = "llm_demo"
+path = "src/bin/llm_demo.rs"
