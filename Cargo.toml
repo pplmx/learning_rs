@@ -9,7 +9,7 @@ edition = "2024"
 rand = "0.8.5"
 num-complex = "0.4"
 ndarray = "0.16.1"
-ndarray-rand = "0.15.0"
+ndarray-rand = "0.16.0"
 
 [[bin]]
 name = "llm_demo"
